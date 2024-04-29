@@ -1,3 +1,18 @@
 [submodule "go_trade_api_gateway"]
 	path = go_trade_api_gateway
 	url = https://github.com/anjush-bhargavan/go_trade_api_gateway.git
+[submodule "go_trade_user"]
+	path = go_trade_user
+	url = https://github.com/anjush-bhargavan/go_trade_user.git
+[submodule "go_trade_product"]
+	path = go_trade_product
+	url = https://github.com/anjush-bhargavan/go_trade_product.git
+[submodule "go_trade_admin"]
+	path = go_trade_admin
+	url = https://github.com/anjush-bhargavan/go_trade_admin.git
+[submodule "go_trade_chat"]
+	path = go_trade_chat
+	url = https://github.com/anjush-bhargavan/go_trade_chat.git
+[submodule "go_trade_notification"]
+	path = go_trade_notification
+	url = https://github.com/anjush-bhargavan/go_trade_notification.git
