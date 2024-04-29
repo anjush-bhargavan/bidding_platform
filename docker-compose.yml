@@ -1,0 +1,119 @@
+version: '3.9'
+
+
+services:
+  postgres:
+    image: postgres:14.11-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: go_trade_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - go_trade
+
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6376:6379"
+    environment:
+      REDIS_PASSWORD: ""
+    networks:
+      - go_trade
+
+  rabbitmq:
+    image: rabbitmq:3-alpine
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5674:5672"
+    networks:
+      - go_trade
+
+  api-service:
+    image: anjushbhargavan/gotrade-apiservice:v3
+    container_name: api-service
+    restart: unless-stopped
+    depends_on:
+      - user-service
+      - admin-service
+      - chat-service
+    ports:
+      - "8080:8080"
+    networks:
+      - go_trade
+
+  user-service:
+    image: anjushbhargavan/gotrade-userservice:v2
+    container_name: user-service
+    restart: unless-stopped
+    depends_on:
+      - product-service
+      - postgres
+      - redis
+    ports:
+      - "8081:8081"
+    networks:
+      - go_trade
+
+  admin-service:
+    image: anjushbhargavan/gotrade-adminservice:v2
+    container_name: admin-service
+    restart: unless-stopped
+    depends_on:
+      - product-service
+      - postgres
+      - user-service
+    ports:
+      - "8083:8083"
+    networks:
+      - go_trade
+
+  product-service:
+    image: anjushbhargavan/gotrade-productservice:v2
+    container_name: product-service
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    ports:
+      - "8082:8082"
+    networks:
+      - go_trade
+
+  chat-service:
+    image: anjushbhargavan/gotrade-chatservice:v2
+    container_name: chat-service
+    restart: unless-stopped
+    depends_on:
+      - user-service
+      - postgres
+    ports:
+      - "8085:8085"
+    networks:
+      - go_trade
+
+  notification-service:
+    image: anjushbhargavan/gotrade-notificationservice:v2
+    container_name: notification-service
+    depends_on:
+      - rabbitmq
+    networks:
+      - go_trade
+
+networks:
+  go_trade:
+    driver: bridge
+
+  
+volumes:
+  postgres_data:
