@@ -1,0 +1,3 @@
+[submodule "go_trade_api_gateway"]
+	path = go_trade_api_gateway
+	url = https://github.com/anjush-bhargavan/go_trade_api_gateway.git
