@@ -44,7 +44,7 @@ services:
       - go_trade
 
   api-service:
-    image: anjushbhargavan/gotrade-apiservice:v4
+    image: anjushbhargavan/gotrade-apiservice:v1
     container_name: api-service
     restart: unless-stopped
     depends_on:
@@ -57,7 +57,7 @@ services:
       - go_trade
 
   user-service:
-    image: anjushbhargavan/gotrade-userservice:v2
+    image: anjushbhargavan/gotrade-userservice:v1
     container_name: user-service
     restart: unless-stopped
     depends_on:
@@ -70,7 +70,7 @@ services:
       - go_trade
 
   admin-service:
-    image: anjushbhargavan/gotrade-adminservice:v2
+    image: anjushbhargavan/gotrade-adminservice:v1
     container_name: admin-service
     restart: unless-stopped
     depends_on:
@@ -83,7 +83,7 @@ services:
       - go_trade
 
   product-service:
-    image: anjushbhargavan/gotrade-productservice:v2
+    image: anjushbhargavan/gotrade-productservice:v1
     container_name: product-service
     restart: unless-stopped
     depends_on:
@@ -96,7 +96,7 @@ services:
       - go_trade
 
   chat-service:
-    image: anjushbhargavan/gotrade-chatservice:v2
+    image: anjushbhargavan/gotrade-chatservice:v1
     container_name: chat-service
     restart: unless-stopped
     depends_on:
@@ -108,7 +108,7 @@ services:
       - go_trade
 
   notification-service:
-    image: anjushbhargavan/gotrade-notificationservice:v3
+    image: anjushbhargavan/gotrade-notificationservice:v1
     container_name: notification-service
     restart: unless-stopped
     depends_on:
